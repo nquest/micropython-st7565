@@ -20,12 +20,6 @@
 # OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
 # WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-# Pinout for Lolin v3
-# CS - HSPI-CS
-# RST - GPIO16
-# A0 - GPIO0
-# CLK - HSPI-CLK
-# DATA - HSPI-MISO
 from micropython import const
 from time import sleep_ms, sleep_us
 import framebuf
