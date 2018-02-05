@@ -26,6 +26,7 @@ from st7565 import ST7565
 RST = Pin(16, Pin.OUT)
 A0 = Pin(0, Pin.OUT)
 CS = Pin(15, Pin.OUT)
+spibus = SPI(1, baudrate=1000000, polarity=1, phase=1)
 
 display = ST7565(spibus, A0, CS, RST)
 display.fill(1)
