@@ -84,7 +84,7 @@ class ST7565(framebuf.FrameBuffer):
             CMD_SET_RESISTOR_RATIO + DISPLAY_RESISTOR_RATIO,  # V5 R ratio
             CMD_SET_VOLUME,  # Contrast
             DISPLAY_CONTRAST,  # Contrast value
-            CMD_SET_POWER + DISPLAY_POWER_MODE):
+                CMD_SET_POWER + DISPLAY_POWER_MODE):
             self.write_cmd(cmd)
         self.show()
         self.write_cmd(CMD_DISPLAY_ON)
@@ -105,8 +105,8 @@ class ST7565(framebuf.FrameBuffer):
         if 0x1 <= value <= 0x3f:
             for cmd in (
                 CMD_SET_VOLUME,
-                value):
-                    self.write_cmd(cmd)
+                    value):
+                self.write_cmd(cmd)
 
     def reset(self):
         self.rst(0)
@@ -119,6 +119,6 @@ class ST7565(framebuf.FrameBuffer):
                 CMD_SET_START_LINE,
                 CMD_SET_PAGE + i,
                 CMD_COLUMN_UPPER,
-                CMD_COLUMN_LOWER):
+                    CMD_COLUMN_LOWER):
                 self.write_cmd(cmd)
             self.write_data(self.buffer[i*128:(i+1)*128])
