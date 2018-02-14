@@ -43,7 +43,7 @@ CMD_SET_BIAS_9 = const(0xA2)
 CMD_SET_BIAS_7 = const(0xA3)
 CMD_DISPLAY_RESET = const(0xE2)
 CMD_NOP = const(0xE3)
-CMD_TEST = const(0xF0) # Exit this mode with CMD_NOP
+CMD_TEST = const(0xF0)  # Exit this mode with CMD_NOP
 CMD_SET_POWER = const(0x28)
 CMD_SET_RESISTOR_RATIO = const(0x20)
 CMD_SET_VOLUME = const(0x81)
@@ -55,6 +55,7 @@ DISPLAY_CONTRAST = const(0x1B)
 DISPLAY_RESISTOR_RATIO = const(5)
 DISPLAY_POWER_MODE = 7
 
+
 class ST7565(framebuf.FrameBuffer):
     """ST7565 Display controller driver"""
     def __init__(self, spi, a0, cs, rst):
@@ -65,21 +66,24 @@ class ST7565(framebuf.FrameBuffer):
         self.width = DISPLAY_W
         self.height = DISPLAY_H
         self.buffer = bytearray(1024)
-        super().__init__(self.buffer, self.width, self.height, framebuf.MONO_VLSB)
+        super().__init__(
+            self.buffer,
+            self.width,
+            self.height,
+            framebuf.MONO_VLSB)
         self.display_init()
 
     def display_init(self):
         self.reset()
         sleep_ms(1)
-        #self.fill(1)
         for cmd in (
-            CMD_DISPLAY_OFF, # Display off
-            CMD_SET_BIAS_9, # Display drive voltage 1/9 bias
-            CMD_SET_ADC_REVERSE, # Reverse SEG
-            CMD_SET_COL_NORMAL, # # Commmon mode normal direction
-            CMD_SET_RESISTOR_RATIO + DISPLAY_RESISTOR_RATIO, # V5 R ratio
-            CMD_SET_VOLUME, # Contrast
-            DISPLAY_CONTRAST, # Contrast value
+            CMD_DISPLAY_OFF,  # Display off
+            CMD_SET_BIAS_9,  # Display drive voltage 1/9 bias
+            CMD_SET_ADC_REVERSE,  # Reverse SEG
+            CMD_SET_COL_NORMAL,  # Commmon mode normal direction
+            CMD_SET_RESISTOR_RATIO + DISPLAY_RESISTOR_RATIO,  # V5 R ratio
+            CMD_SET_VOLUME,  # Contrast
+            DISPLAY_CONTRAST,  # Contrast value
             CMD_SET_POWER + DISPLAY_POWER_MODE):
             self.write_cmd(cmd)
         self.show()
@@ -102,7 +106,7 @@ class ST7565(framebuf.FrameBuffer):
             for cmd in (
                 CMD_SET_VOLUME,
                 value):
-                self.write_cmd(cmd)
+                    self.write_cmd(cmd)
 
     def reset(self):
         self.rst(0)
